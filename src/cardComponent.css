@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;600;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  font-family: "Azeret Mono", monospace;
+}
+
+.card__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  padding: 5px;
+  background-color: rgb(166, 224, 205);
+  border-radius: 10px;
+}
+
+.card-name-tittle {
+  color: rgb(80, 80, 80);
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 800;
+}
+
+.card-description {
+  font-weight: 600;
+  color: rgb(252, 252, 252);
+  font-size: 0.8rem;
+  text-align: center;
+}
