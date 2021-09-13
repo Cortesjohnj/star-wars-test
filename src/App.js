@@ -1,45 +1,37 @@
-import "./App.css";
-import { useEffect, useState } from "react";
-import CardComponent from "./cardComponent";
-import axios from "axios";
+import './App.css';
+import { useEffect } from 'react';
+import CardComponent from './cardComponent';
+import { useSelector, useDispatch } from 'react-redux';
+import { next, prev, getData } from './actionCreators';
 
 function App() {
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState({});
+  const { page, data } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get(`https://swapi.dev/api/people/?page=${page}`)
-      .then(function (response) {
-        const data = response.data.results;
-        setData(data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [page]);
+    dispatch(getData(page));
+  }, [dispatch, page]);
 
-  const nextPage = (e) => {
-    e.preventDefault();
-    setPage((page) => setPage(page + 1));
+  const handleNext = () => {
+    dispatch(next());
   };
 
-  const prevPage = (e) => {
-    e.preventDefault();
-    setPage((page) => (page === 1 ? (page = 1) : page - 1));
+  const handlePrev = () => {
+    dispatch(prev());
   };
 
   return (
     <>
-      <h1>Star Wars Characters</h1>
-      {data.map((ele) => (
-        <CardComponent data={ele} />
-      ))}
-
+      <h1 className="page_tittle">Star Wars Characters</h1>
+      <div className="page__container">
+        {data.map((ele) => (
+          <CardComponent data={ele} />
+        ))}
+      </div>
       <div className="Buttons">
-        <button onClick={prevPage}>Prev</button>
+        <button onClick={handlePrev}>Prev</button>
         <p>{page}</p>
-        <button onClick={nextPage}>Next</button>
+        <button onClick={handleNext}>Next</button>
       </div>
     </>
   );
